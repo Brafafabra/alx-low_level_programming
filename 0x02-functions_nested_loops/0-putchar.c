@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+#include<main.h>
 /**
  * _putchar - Custom function to print a single character
  * @c: The character to be printed
