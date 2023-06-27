@@ -1,37 +1,25 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
 /**
- * _atoi - Converts a string to an integer
- * @s: The string to convert
+ * main - Entry point
  *
- * Return: The converted integer
+ * Return: Always 0
  */
-int _atoi(char *s)
+int main(void)
 {
-	int sign = 1;
-	int result = 0;
-	int i = 0;
+    srand(time(NULL)); // Seed the random number generator with the current time
+    char password[11];
+    int i;
 
-	/* Check for negative sign */
-	if (s[0] == '-')
-	{
-		sign = -1;
-		i++;
-	}
+    for (i = 0; i < 10; i++)
+        password[i] = rand() % 94 + 33; // Generate a random ASCII character between 33 and 126
 
-	/* Iterate through the string */
-	for (; s[i] != '\0'; i++)
-	{
-		/* Check if character is a digit */
-		if (s[i] >= '0' && s[i] <= '9')
-		{
-			/* Update the result */
-			result = result * 10 + (s[i] - '0');
-		}
-		else if (result > 0)
-		{
-			/* Stop if non-digit character is encountered after digits */
-			break;
-		}
-	}
+    password[10] = '\0'; // Null-terminate the password string
 
-	return (result * sign);
+    printf("%s\n", password); // Print the generated password
+
+    return (0);
 }
+
