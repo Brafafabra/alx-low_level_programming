@@ -1,52 +1,56 @@
+#include "main.h"
 #include <stdio.h>
 
 /**
- * _atoi - Convert a string to an integer.
- * @s: The string to convert.
+ * _atoi - Converts a string to an integer.
+ * @s: The string to be converted.
  *
  * Return: The converted integer.
  */
 int _atoi(char *s)
 {
-	int sign = 1; /* Sign of the number */
-	int result = 0; /* Resulting integer */
+	int sign = 1;
+	int result = 0;
+	int i = 0;
 
-	/* Skip whitespace characters */
-	while (*s == ' ')
-		s++;
+	/* Check for leading whitespace */
+	while (s[i] == ' ')
+		i++;
 
-	/* Handle the sign */
-	if (*s == '-')
+	/* Check for sign */
+	if (s[i] == '-')
 	{
 		sign = -1;
-		s++;
+		i++;
 	}
-	else if (*s == '+')
+	else if (s[i] == '+')
 	{
-		s++;
+		i++;
 	}
 
-	/* Convert the string to an integer */
-	while (*s >= '0' && *s <= '9')
+	/* Convert string to integer */
+	while (s[i] >= '0' && s[i] <= '9')
 	{
 		/* Check for overflow */
-		if (result > (result * 10 + (*s - '0')))
+		if (result > INT_MAX / 10 || (result == INT_MAX / 10 && s[i] - '0' > INT_MAX % 10))
 		{
-			/* Overflow detected, return minimum or maximum value */
-			return (sign == -1) ? -2147483648 : 2147483647;
+			if (sign == 1)
+				return (INT_MAX);
+			else
+				return (INT_MIN);
 		}
-		result = result * 10 + (*s - '0');
-		s++;
+
+		result = result * 10 + (s[i] - '0');
+		i++;
 	}
 
-	/* Apply the sign */
-	return result * sign;
+	return (result * sign);
 }
 
 /**
- * main - Test the _atoi function.
+ * main - Check the code
  *
- * Return: Always 0.
+ * Return: Always 0
  */
 int main(void)
 {
@@ -69,5 +73,5 @@ int main(void)
 	nb = _atoi("---++++ -++ Sui - te -   402 #cisfun :)");
 	printf("%d\n", nb);
 
-	return 0;
+	return (0);
 }
