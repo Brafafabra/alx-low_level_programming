@@ -1,25 +1,73 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
 
 /**
- * main - Entry point
+ * _atoi - Convert a string to an integer.
+ * @s: The string to convert.
  *
- * Return: Always 0
+ * Return: The converted integer.
+ */
+int _atoi(char *s)
+{
+	int sign = 1; /* Sign of the number */
+	int result = 0; /* Resulting integer */
+
+	/* Skip whitespace characters */
+	while (*s == ' ')
+		s++;
+
+	/* Handle the sign */
+	if (*s == '-')
+	{
+		sign = -1;
+		s++;
+	}
+	else if (*s == '+')
+	{
+		s++;
+	}
+
+	/* Convert the string to an integer */
+	while (*s >= '0' && *s <= '9')
+	{
+		/* Check for overflow */
+		if (result > (result * 10 + (*s - '0')))
+		{
+			/* Overflow detected, return minimum or maximum value */
+			return (sign == -1) ? -2147483648 : 2147483647;
+		}
+		result = result * 10 + (*s - '0');
+		s++;
+	}
+
+	/* Apply the sign */
+	return result * sign;
+}
+
+/**
+ * main - Test the _atoi function.
+ *
+ * Return: Always 0.
  */
 int main(void)
 {
-    srand(time(NULL)); // Seed the random number generator with the current time
-    char password[11];
-    int i;
+	int nb;
 
-    for (i = 0; i < 10; i++)
-        password[i] = rand() % 94 + 33; // Generate a random ASCII character between 33 and 126
+	nb = _atoi("98");
+	printf("%d\n", nb);
+	nb = _atoi("-402");
+	printf("%d\n", nb);
+	nb = _atoi("          ------++++++-----+++++--98");
+	printf("%d\n", nb);
+	nb = _atoi("214748364");
+	printf("%d\n", nb);
+	nb = _atoi("0");
+	printf("%d\n", nb);
+	nb = _atoi("Suite 402");
+	printf("%d\n", nb);
+	nb = _atoi("         +      +    -    -98 Battery Street; San Francisco, CA 94111 - USA             ");
+	printf("%d\n", nb);
+	nb = _atoi("---++++ -++ Sui - te -   402 #cisfun :)");
+	printf("%d\n", nb);
 
-    password[10] = '\0'; // Null-terminate the password string
-
-    printf("%s\n", password); // Print the generated password
-
-    return (0);
+	return 0;
 }
-
