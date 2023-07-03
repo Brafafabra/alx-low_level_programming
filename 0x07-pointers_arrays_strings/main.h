@@ -1,3 +1,4 @@
+
 unsigned int _strspn(char *s, char *accept);
 char *_memset(char *s, char b, unsigned int n);
 void set_string(char **s, char *to);
