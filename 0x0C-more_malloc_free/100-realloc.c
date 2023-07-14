@@ -2,7 +2,7 @@
 
 /**
  * _realloc - Reallocates a memory block using malloc and free
- * @ptr: Pointer to the previously allocated memory block
+ * @ptr: Pointer to the memory previously allocated with malloc
  * @old_size: Size of the allocated space in bytes
  * @new_size: New size of the memory block in bytes
  *
