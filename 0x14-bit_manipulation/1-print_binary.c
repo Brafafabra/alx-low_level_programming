@@ -6,8 +6,20 @@
  */
 void print_binary(unsigned long int n)
 {
-	if (n > 1)
-		print_binary(n >> 1); /* Recursive call to print the binary representation
+	unsigned long int mask = 1UL << (sizeof(unsigned long int) * 8 - 1);
+	int flag = 0;
 
-	_putchar((n & 1) + '0'); /* Print the last bit of n */
+	while (mask)
+	{
+		if (n & mask)
+		{
+			_putchar('1');
+			flag = 1;
+		}
+		else if (flag || mask == 1)
+		{
+			_putchar('0');
+		}
+		mask >>= 1;
+	}
 }
